@@ -32,10 +32,9 @@ openssl req -passin pass:"$1" -subj "/C=US/ST=Random/L=Random/O=Global Security/
 # Add root cert as trusted cert
 if [[ "$OSTYPE" == "linux-gnu"* ]]; then
         # Linux
-        yum -y install ca-certificates
-        update-ca-trust force-enable
-        cp ../certs/rootCA.pem /etc/pki/ca-trust/source/anchors/
-        update-ca-trust
+        sudo apt -y install ca-certificates
+        sudo cp ../certs/rootCA.pem /etc/pki/ca-trust/source/anchors/
+        sudo update-ca-certificates
 elif [[ "$OSTYPE" == "darwin"* ]]; then
         # Mac OSX
         security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ../certs/rootCA.pem
